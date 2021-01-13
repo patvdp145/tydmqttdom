@@ -1,6 +1,7 @@
 # Les ligne commençant par '#' sont des commentaires.
 # 
 __pycache__/
+config.json
 # Ignorer tous les fichiers html
 #*.html
 # à l'exception de foo.html qui est maintenu à la main
