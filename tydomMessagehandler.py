@@ -84,6 +84,9 @@ class TydomMessageHandler():
                     output += field
                     i = i + 1
 #            try:
+            msg_type = None
+            # les structures /devices/data et PUT/devices/data sont les mêmes, mais /devices/data contient
+            # 17 éléments dans data alors que PUT/devices/data n'en contient qu'un seul.
             if message_type == '/refresh/all':
                 pass
             elif message_type == '/info':
@@ -91,13 +94,15 @@ class TydomMessageHandler():
             elif message_type == 'PUT/devices/data' or message_type =='/devices/cdata':
                 #print('PUT /devices/data message detected !')
                 incoming = self.parse_put_response(bytes_str)
-                await self.parse_response(incoming)
+                msg_type = 'msg_data'
+                await self.parse_response(incoming,msg_type)
             elif message_type == '/devices/data' or message_type =='/devices/cdata':
                 #print('/devices/data message detected !')
+                msg_type = 'msg_data'
                 response = self.response_from_bytes(bytes_str[len(self.cmd_prefix):])
                 incoming = response.data.decode("utf-8")
                 try:
-                    await self.parse_response(incoming)
+                    await self.parse_response(incoming,msg_type)
                 except:
                     logger_info.info('RAW INCOMING ...')
                     #print(bytes_str)   
@@ -105,68 +110,19 @@ class TydomMessageHandler():
                 #pass
                 response = self.response_from_bytes(bytes_str[len(self.cmd_prefix):])
                 incoming = response.data.decode("utf-8")
-                await self.parse_response(incoming)                
+                msg_type = 'msg_config'
+                await self.parse_response(incoming,msg_type)                
             else:
                 pass
-                #incoming = self.parse_put_response(bytes_str)
-                #await self.parse_response(incoming)                
-                    
-
-#            try:
-#                incoming = self.parse_put_response(bytes_str)
-#                await self.parse_response(incoming)
-#            except:
-#                incoming = self.parse_put_response(bytes_str)
-#                await self.parse_response(incoming)
 
     # Basic response parsing. Typically GET responses + instanciate covers and alarm class for updating data
-    async def parse_response(self, incoming):
+    async def parse_response(self, incoming,msg_type):
         data = incoming
-        msg_type = None
-
-        first = str(data[:40])
         parsed = json.loads(data)
-        #print('parse_response --{}'.format( json.dumps(parsed, indent=2)))
-        #print('FIRST : ', first)
-        
+        #print('Message type : {}'.format(msg_type))
+
         # Detect type of incoming data
         if (data != ''):
-            if ("groups" in first):
-                #logger_info.info('Incoming message type : groups config detected')
-                msg_type = 'msg_config'
-                parsed = json.loads(data)
-                await self.parse_config_data(parsed=parsed)
-            elif ("scenarios" in first):
-                #logger_info.info('Incoming message type : config detected')
-                msg_type = 'msg_config'
-            elif ("moments" in first):
-                #logger_info.info('Incoming message type : config detected')
-                msg_type = 'msg_config'
-            elif ("id" in first):
-                #logger_info.info('Incoming message type : data detected')
-                #print('parse_response on trouve id in first')
-                msg_type = 'msg_data'
-            elif ("endpoints" in first):
-                #logger_info.info('Incoming message type : config detected')
-                # une liste de tous les endpoints electric à décoder
-                msg_type = 'msg_config'
-                #print('parse_response on trouve endpoints in first')
-                #pass
-            elif ("date" in first):
-                #logger_info.info('Incoming message type : config detected')
-                msg_type = 'msg_config'
-            elif ("doctype" in first):
-                #logger_info.info('Incoming message type : html detected (probable 404)')
-                msg_type = 'msg_html'
-                #print(data)
-            elif ("productName" in first):
-                #logger_info.info('Incoming message type : Info detected')
-                msg_type = 'msg_info'
-                # print(data)        
-            else:
-                logger_info.info('Incoming message type : no type detected')
-                #print(first)
-
             if not (msg_type == None):
                 try:                    
                     if (msg_type == 'msg_config'):
