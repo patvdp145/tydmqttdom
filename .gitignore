@@ -2,6 +2,7 @@
 # 
 __pycache__/
 config.json
+*.pyc
 # Ignorer tous les fichiers html
 #*.html
 # à l'exception de foo.html qui est maintenu à la main
