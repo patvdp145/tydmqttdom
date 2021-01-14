@@ -37,13 +37,13 @@ logging.info('Dectecting environnement......')
 
 # DEFAULT VALUES
 loop = asyncio.get_event_loop()
-TYDOM_MAC='001A25023C86'
-TYDOM_PASSWORD='Lbjfcp20'
-TYDOM_IP = '192.168.1.28'
+TYDOM_MAC='001A25xxxx'
+TYDOM_PASSWORD='xxxxxxx'
+TYDOM_IP = '192.168.1.xx'
 #TYDOM_IP = 'mediation.tydom.com'
 MQTT_USER = ''
 MQTT_PASSWORD = ''
-MQTT_HOST = '192.168.1.46'
+MQTT_HOST = '192.168.1.xx'
 MQTT_PORT = 1883
 MQTT_SSL = False
 TYDOM_ALARM_PIN = None

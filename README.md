@@ -121,7 +121,7 @@ ls -l /var/log/tydmqttdom.log*
 ## TODO
 
 -  nettoyer le code 
-- ajouter la gestion de volets roulant
+- ajouter la gestion de volets roulants
 - ajouter des arguments pour le paramétrage 
 
 
