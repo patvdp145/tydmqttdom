@@ -1,7 +1,9 @@
 # Les ligne commençant par '#' sont des commentaires.
 # 
 __pycache__/
-config.json
+.ipynb_checkpoints/
+#config.json
+config_exemple.json
 *.pyc
 # Ignorer tous les fichiers html
 #*.html
