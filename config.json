@@ -1,0 +1,17 @@
+  {
+    "TYDOM_MAC": "001A25xxxxxx",
+    "TYDOM_IP": "192.168.1.xx",
+    "TYDOM_PASSWORD":"xxxxxxxxx",
+    "MQTT_HOST": "192.168.1.xx",
+    "MQTT_USER": "",
+    "MQTT_PASSWORD": "",
+    "MQTT_PORT": 1883,
+    "MQTT_SSL": false,
+    "log_level": "info",
+       "devices":
+    { "160xxxxxxx":502 ,
+     "160xxxxxxx":655 ,
+     "160xxxxxxx":656 }
+    }
+
+
