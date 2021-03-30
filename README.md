@@ -44,6 +44,10 @@ Utilisation d'un fichier de configuration json comme tydom2mqtt dans lequel on a
      "160xxxxxx":656 }
     }
 ```
+
+Version 2 de mosquitto, on doit mettre adresse du broker = 127.0.0.1 à moins qu'on utilise un fichier de configuration. 
+voir :https://mosquitto.org/blog/2020/12/version-2-0-0-released/
+
 ## Utilisation
 - associer  chaque  RF 6600 FP dans l'app Delta Dore (Ios ou Android)
 - utiliser tydom_python avec get_configs_file (voir plus haut) pour récupérer les endpoint  id de chaque  RF 6600 FP
@@ -173,6 +177,10 @@ It  uses a json config file like tydom2mqtt in which I had to translate the tydo
      "160xxxxxx":656 }
     }
 ```
+With version 2 of mosquitto, unless using a conf  file, broker address must be 127.0.0.1.
+See :https://mosquitto.org/blog/2020/12/version-2-0-0-released/
+
+
 # Getting started
 
 - create/ associate each RF 6600 FP with the Delta Dore app
