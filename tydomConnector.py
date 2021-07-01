@@ -146,10 +146,11 @@ class TydomWebSocketClient():
 
         str = self.cmd_prefix + method +' ' + msg +" HTTP/1.1\r\nContent-Length: 0\r\nContent-Type: application/json; charset=UTF-8\r\nTransac-Id: 0\r\n\r\n"
         a_bytes = bytes(str, "ascii")
-        if not 'pwd' in msg:
-            logger_info.info('>>>>>>>>>> Sending to tydom client {} {}'.format(method, msg))
-        else:
-            logger_info.info('>>>>>>>>>> Sending to tydom client secret msg{}'.format(method))
+        if not '/refresh/all' in msg:
+            if not 'pwd' in msg:
+                logger_info.info('>>>>>>>>>> Sending to tydom client {} {}'.format(method, msg))
+            else:
+                logger_info.info('>>>>>>>>>> Sending to tydom client secret msg{}'.format(method))
 
         await self.connection.send(a_bytes)
         # print(a_bytes)
